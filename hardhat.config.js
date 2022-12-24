@@ -32,11 +32,6 @@ module.exports = {
     hardhat: {
       chainId: 1337
     },
-    mainnet: {
-      url: process.env.MAINNET_RPC_URL,
-      accounts: [process.env.PRIVATE_KEY],
-      saveDeployments: true,
-    },
     mumbai: {
       url: process.env.MUMBAI_RPC_URL,
       accounts: [process.env.PRIVATE_KEY],
@@ -44,6 +39,10 @@ module.exports = {
     }
   },
   etherscan: {
-    apiKey: process.env.ETHERSCAN_API_KEY
+    apiKey: {
+      polygonMumbai: process.env.POLYSCAN_API_KEY,
+    }
   }
 };
+
+// 0x64F9264729b4C285B5231e5BEa25a50A72a31109
