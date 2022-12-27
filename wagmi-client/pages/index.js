@@ -1,6 +1,4 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 import {
   useAccount,
   useConnect,
@@ -10,24 +8,21 @@ import {
   useNetwork,
   useWaitForTransaction,
 } from "wagmi";
-
 import { ethers } from "ethers";
-import { useState, useEffect } from 'react';
-import tokenContract from '../contracts/contracts.json'
-import { ConnectButton } from '@rainbow-me/rainbowkit';
-
-
-const inter = Inter({ subsets: ['latin'] })
+import { useState, useEffect } from "react";
+import tokenContract from "../contracts/contracts.json";
 
 export default function Home() {
-
   const CONTRACT_ADDRESS = "0x874202975696D4910ea70F862b25FdBE531AEb3a";
 
-  // const contractConfig = {
-  //   addressOrName: CONTRACT_ADDRESS,
-  //   contractInterface: tokenContract.abi 
-  // }
+  /* Not working on this build
+  const contractConfig = {
+    addressOrName: CONTRACT_ADDRESS,
+    contractInterface: tokenContract.abi,
+  };
+  */
 
+  //Mint Function
   const {
     data: mintData,
     write: buy,
@@ -38,21 +33,19 @@ export default function Home() {
     addressOrName: CONTRACT_ADDRESS,
     contractInterface: tokenContract.abi,
     functionName: "mint",
-  })
+  });
 
   const mintFreeTokens = async () => {
-    await buy({args: ["0xA86275c0fa6de82eb4a4D5DCe5A9bBf60984fC41", ethers.utils.parseEther('2')]});
+    await buy({args: ["0xd3B08c04daAa551b69c666CF4CFEd718b751743F", ethers.utils.parseEther("2")]})
   }
 
   useEffect(() => {
-    console.log("Mint data: ", mintData);
-    console.log("isMintLoading: ", isMintLoading);
-    console.log("isMintStarted: ", isMintStarted);
+    console.log("mintData:", mintData);
+    console.log("isMintLoading:", isMintLoading);
+    console.log("isMintStarted", isMintStarted);
     console.log("mintError:", mintError);
     console.log("___________");
   }, [mintData, isMintLoading, isMintStarted]);
-
-
 
   return (
     <div className="container flex flex-col  items-center mt-10">
